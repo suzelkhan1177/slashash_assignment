@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Favourites</title>
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>Favourites</h1>
+    <% if (favourites.length) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Branch Type</th>
+                    <th>Delivery Status</th>
+                    <th>District</th>
+                    <th>Region</th>
+                    <th>State</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% favourites.forEach(fav => { %>
+                    <tr>
+                        <td><%= fav.name %></td>
+                        <td><%= fav.branch_type %></td>
+                        <td><%= fav.delivery_status %></td>
+                        <td><%= fav.district %></td>
+                        <td><%= fav.region %></td>
+                        <td><%= fav.state %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>No favourites found!</p>
+    <% } %>
+</body>
+</html>

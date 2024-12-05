@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Search</title>
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>Search Postal PIN Code</h1>
+    <form method="get" action="/search">
+        <input type="radio" name="type" value="pincode" checked /> Search by Pincode
+        <input type="radio" name="type" value="branch" /> Search by Branch Name
+        <input type="text" name="query" placeholder="Enter Pincode or Branch Name" required />
+        <button type="submit">Search</button>
+    </form>
+    <div class="fetch-fav-button-container">
+        <a href="/favourites" 
+           style="display: inline-block; padding: 10px 10px; background-color: red; color: white; font-size: 16px; text-align: center; text-decoration: none; border: none; cursor: pointer;">
+           Fetch All Favourites
+        </a>
+    </div>
+    
+    <% if (results.length) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Branch Type</th>
+                    <th>Delivery Status</th>
+                    <th>District</th>
+                    <th>Region</th>
+                    <th>State</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% results.forEach(result => { %>
+                    <tr>
+                        <td><%= result.Name %></td>
+                        <td><%= result.BranchType %></td>
+                        <td><%= result.DeliveryStatus %></td>
+                        <td><%= result.District %></td>
+                        <td><%= result.Region %></td>
+                        <td><%= result.State %></td>
+                        <td>
+                            <form method="post" action="/favourites">
+                                <input type="hidden" name="name" value="<%= result.Name %>" />
+                                <input type="hidden" name="branchType" value="<%= result.BranchType %>" />
+                                <input type="hidden" name="deliveryStatus" value="<%= result.DeliveryStatus %>" />
+                                <input type="hidden" name="district" value="<%= result.District %>" />
+                                <input type="hidden" name="region" value="<%= result.Region %>" />
+                                <input type="hidden" name="state" value="<%= result.State %>" />
+                                <button type="submit">Mark as Favourite</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+</body>
+</html>
